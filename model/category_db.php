@@ -6,9 +6,9 @@
         $query = 'SELECT * FROM categories ORDER BY categoryID';
         $statement = $db -> prepare($query);
         $statement->execute();
-        $categories = $statement->fetchall();
+        $category = $statement->fetchall();
         $statement-> closeCursor();
-        return $categories;
+        return $category;
     }
 
     function get_category_name($category_id) {
@@ -26,11 +26,11 @@
         return $category_name;
     }
 
-    function delete_category($category_id) {
+    function delete_category($category_ID) {
         global $db;
         $query ='DELETE FROM categories WHERE categoryID = :category_id';
         $statement = $db -> prepare($query);
-        $statement -> bindValue(':category_id', $category_id);
+        $statement -> bindValue(':category_id', $category_ID);
         $statement->execute();
         $statement-> closeCursor();
     }

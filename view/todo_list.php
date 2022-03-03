@@ -25,15 +25,14 @@
         <?php foreach ($todolist as $todo) : ?>
         <div class = "list__row">
             <div class = "list__item">
-                <p class = "bold"> <?= $todo['categoryName'] ?> </p>
-                <p> <?= $todolist['Title'] ?> </p>
-                <p> <?= $todolist['Description'] ?></p>
+                <p> <?= $todo['Title'] ?>
+                    <?= $todo['Description'] ?></p>
             </div>
             <div class = "list__removeItem">
                 <form action = "." method="post">
-                    <input type="hidden" name ="action" value = "delete_todo">
-                    <input type = "hidden" name = "category_id" value = "<?= $todolist['ID'] ?> ">
-                    <button class ="remove-button"> Delete</button>
+                    <input type="hidden" name ="action" value = "delete_todolist">
+                    <input type ="hidden" name = "todolist_id" value = "<?= $todo['ItemNum'];?>" >
+                    <button class = "remove-button" > Delete </button>
                 </form>
             </div>
         </div>
@@ -41,7 +40,7 @@
         <?php } else { ?>
         <br>
         <?php if ($category_id) { ?>
-            <p> No TODo List exist for this category yet.</p>
+            <p> No ToDo List exist for this category yet.</p>
         <?php } else { ?>
             <p> No ToDo List exist yet.</p>
         <?php } ?>
@@ -52,23 +51,23 @@
 <section id = "add" class = "add">
        <h2> Add To Do Item </h2>
         <form action = "." method = "post" id = "add_form" class = "add_form">
-            <input type = "hidden" name = "action" value="add_todo">
-            <div class ="add__inputs">
+            <input type = "hidden" name = "action" value="add_todolist">
+            <div class ="add__input">
                 <label> Category: </label>
-                <select name="category_id" required>
+                <select name="categoryID" required>
                     <option value=""> Please Select </option>
                     <?php foreach($category as $categories) : ?>
-                    <option value=" <?php $categories['categoryID']; ?>">
-                        <?= $categories['categoryName'];?>
+                    <option value="<?php $categories['categoryID']?>">
+                        <?= $categories['categoryName']?>
                     </option>
                     <?php endforeach; ?>
                 </select>
                 <label>Title: </label>
-                <input type = "text" name ="Title" maxLength = "30" placeholder="Title" required>
+                <input type = "text" name ="title" maxLength = "30" placeholder="Title" required>
                 <label>Description: </label>
-                <input type = "text" name ="Description" maxLength = "120" placeholder="Description" required>
+                <input type = "text" name ="description" maxLength = "120" placeholder="Description" required>
             </div>
-            <div class ="add_addItem">
+            <div class ="add_todolist">
                     <button class = "add_button bold"> Add </button>
             </div>
         </form>

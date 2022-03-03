@@ -12,12 +12,12 @@
             </div>
             <div class = "list__removeItem">
                 <form action = "." method = "post"> 
-                    <input type = "hidden" name = "action" value="delete_category">
-                    <input type ="hidden" name = "category_id" values = "<?=$categories['categoryID']?>">
+                    <input type = "hidden" name = "action" type="delete_category">
+                    <input type ="hidden" name = "category_ID" values="<?=$categories['categoryID']; ?>">
                     <button class ="remove-button"> Remove </button>
                 </form>
             </div>
-        <?php endforeach ?>
+        <?php endforeach; ?>
         </div>
     </section>
 <?php } else { ?> 
@@ -27,7 +27,7 @@
 <section id="add" class="add">
     <h2> Add Category </h2>
     <form action ="." method = "post" id="add_form" class = "add_form"> 
-        <input type = "hidden" name = "action" value = "add_category">
+        <input type = "hidden" name = "action" value="add_category">
         <div class = "add__input" >
             <label> Name:</label>
             <input type ="text" name = "category_name" maxLength= "50" placeholder="Name" autofocus required>

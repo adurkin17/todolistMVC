@@ -4,14 +4,14 @@
     require('C:\xampp\htdocs\mvcToDoList\model\category_db.php');
 
     $todolist_id = filter_input(INPUT_POST, 'todolist_id', FILTER_VALIDATE_INT);
-    $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
+    $title = filter_input(INPUT_POST, 'Title', FILTER_SANITIZE_STRING);
+    $description = filter_input(INPUT_POST, 'Description', FILTER_SANITIZE_STRING);
     $category_name = filter_input(INPUT_POST, 'category_name', FILTER_SANITIZE_STRING);
 
-    $category_id = filter_input(INPUT_POST, 'category_id', FILTER_VALIDATE_INT);
+    $category_id = filter_input(INPUT_POST, 'categoryID', FILTER_VALIDATE_INT);
     if (!$category_id) {
 
-        $category_id = filter_input(INPUT_GET, 'category_id', FILTER_VALIDATE_INT);
+        $category_id = filter_input(INPUT_GET, 'categoryID', FILTER_VALIDATE_INT);
     }
 
     $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING);
@@ -32,11 +32,11 @@
             add_category($category_name);
             header("Location: .?action=list_categories");
             break;
-        case "add_todo":
+        case "add_todolist":
             if($category_id && $title && $description)
             {
                 add_todolist($category_id,$description,$title);
-                header("Location: .?category_id = $category_id");
+                header("Location: .?categoryID = $category_id");
             } else {
                 $error= "invalid todo data. Please Check your to do item";
                 include('C:\xampp\htdocs\mvcToDoList\view\error.php');
@@ -44,8 +44,6 @@
             }
             break;
         case "delete_category":
-            if($category_id)
-            {
                 try {
                     delete_category($category_id);
 
@@ -57,9 +55,8 @@
                     exit();
                 }
                 header("Location: .?action=list_categories");
-            }
             break;
-        case "delete_todo":
+        case "delete_todolist":
             if ($todolist_id) {
                 delete_todolist($todolist_id);
                 header("Location: .?category_id=$category_id");
